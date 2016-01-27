@@ -46,7 +46,14 @@ var WaveformGenerator = (function(audioBuffer, settingsObject) {
       x = Math.floor(x - 1);
       y = Math.floor(y - 1);
       var ctx = canvas.getContext('2d');
-      ctx.fillStyle = settings.waveformColor;
+
+      if(typeof settings.waveformColor === 'string') {
+        ctx.fillStyle = settings.waveformColor;
+      } else {
+        ctx.fillStyle = settings.waveformColor[Math.floor(Math.random()*settings.waveformColor.length)];
+      }
+      console.log(settings.waveformColor);
+
       ctx.fillRect(x, y, barWidth, barHeight);
     } else if (settings.drawMode === 'svg') {
       var path = document.createElement('path');
